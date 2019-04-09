@@ -10,6 +10,32 @@ computer programs which interact with Scheduler. Such programs can
 query the Scheduler database and create new entries within it,
 subject of course to the usual authentication and access permissions.
 
+--------------
+Pre-requisites
+--------------
+
+In order to be able to use the API, you need an existing running
+installation of Xronos Scheduler.  You are strongly advised to
+set up some kind of development system against which to do your
+software development.  This can easily be on the same machine,
+with a copy of the code running in development mode.
+
+All the examples here assume you are running a copy of Scheduler
+locally and so use a domain prefix of:
+
+::
+
+  http://localhost:3000/
+
+To run your code against your real Scheduler installation, you would
+change this prefix to:
+
+::
+
+  https://scheduler.example.org/
+
+or whatever your installation's FQDN is.
+
 --------
 Concepts
 --------

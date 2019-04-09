@@ -21,6 +21,7 @@ Download this guide as a
 .. toctree::
 
   introduction
+  dates
   login
   elements
   errors
