@@ -17,22 +17,26 @@ Pre-requisites
 In order to be able to use the API, you need an existing running
 installation of Xronos Scheduler.  You are strongly advised to
 set up some kind of development system against which to do your
-software development.  This can easily be on the same machine,
-with a copy of the code running in development mode.
+software development.  This can easily be on the same machine where
+you are doing your development, with a copy of the Scheduler code
+running in development mode.
 
-All the examples here assume you are running a copy of Scheduler
-locally and so use a domain prefix of:
+To get the feel of the API, you can also try it out against
+the public Scheduler demonstration system at:
 
-::
+https://schedulerdemo.xronos.uk/
 
-  http://localhost:3000/
+All the examples given here use that system and can be run directly
+from your computer.
 
-To run your code against your real Scheduler installation, you would
-change this prefix to:
+If you were instead using a local copy of Scheduler you would
+change the URL prefix to:
 
-::
+http://localhost:3000
 
-  https://scheduler.example.org/
+and then for your live system to:
+
+https://myscheduler.example.org/
 
 or whatever your installation's FQDN is.
 
@@ -106,7 +110,7 @@ In order to make use of the API, your Scheduler installation needs a
 small amount of preparatory work.
 
 To create events through the API, your system needs an Eventsource
-creating with a name of "API".  New installations will have this
+with a name of "API".  New installations will have this
 already, but if you're upgrading an older system you will need to
 create it manually through the usual menus.
 
@@ -156,9 +160,9 @@ URLs
 All functions of the API require you to access a URL, using one of
 GET, POST or DELETE.  A typical URL would look like this:
 
-  https://myhost.xronos.uk/api/elements?namelike=smith
+  https://schedulerdemo.xronos.uk/api/elements?namelike=smith
 
-Obviously you need to change the "myhost.xronos.uk" bit to match
+Obviously you need to change the "schedulerdemo.xronos.uk" bit to match
 your own host's domain name, but the next bit is always "/api/" and
 then a path using the normal Rails conventions.
 
@@ -202,6 +206,9 @@ installation uses https instead.
 The authentication process involves sending the user's UUID and if
 you do that over an http connection then anyone could see it.
 
-All the examples in this guide use http://localhost:3000 as a base
-URL, on the assumption that you will be doing your initial experimentation
-on a development system.
+All the examples in this guide use https://schedulerdemo.xronos.uk/ as a
+base URL, so you can run them yourself immediately against this
+demonstration server.
+
+The entire database on this server is reset every night, so it doesn't
+matter if you create events on it.

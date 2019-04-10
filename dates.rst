@@ -35,8 +35,8 @@ pieces of information here which a human would naturally understand,
 but a computer won't unless we do things right.  In the first
 case, the implicit piece of information is that the event lasts all
 day - it ends at the end of the 3rd.  In the second case, what is
-meant is that the event runs from the **start** of the 5th to the
-**end** of the 7th.
+meant is that the event runs from the *start* of the 5th to the
+*end* of the 7th.
 
 The start time for our public holiday is ``2019-03-03 00:00:00``
 but the end time is ``2019-03-04 00:00:00``.  This can really surprise

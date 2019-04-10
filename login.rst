@@ -30,7 +30,7 @@ to the Scheduler API:
 ::
 
   rm -f cookies.sav
-  curl -K curl.opt -c cookies.sav http://localhost:3000/api/login?uid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
+  curl -K curl.opt -c cookies.sav https://schedulerdemo.xronos.uk/api/login?uuid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
 
 First we delete the cookies file to get rid of any old cookies which
 we might have.  Then we invoke curl to connect to the API.
@@ -40,8 +40,14 @@ cookies to the file.  This is needed only for the login command.  After
 that the "-b cookies.sav" in the curl.opt file is enough to tell curl to
 read the cookies from the file and send them.
 
-Replace the uid given here with whatever you saved when you enabled the
-user to use the API.
+.. note::
+
+  The uid used here is hard-coded into the demonstration data loaded
+  on the demonstration server.  It will give you access as the user
+  Simon Philpotts - the same as if you log in interactively.
+
+For your own development or live system, change the UUID to that
+of your chosen user.
 
 A successful response to this login attempt will have an http status
 of 200 (OK) and will carry the following JSON data:
@@ -70,7 +76,7 @@ The following curl command will effect a logout:
 
 ::
 
-  curl -K curl.opt http://localhost:3000/api/logout
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/logout
 
 and the response will be:
 

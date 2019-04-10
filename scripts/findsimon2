@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -K curl.opt -G --data-urlencode "name=SJP - Simon Philpotts" https://schedulerdemo.xronos.uk/api/elements
+echo
