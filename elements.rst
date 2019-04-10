@@ -102,9 +102,6 @@ A well formed request which nonetheless matches no elements would return:
 Get more details
 ----------------
 
-Having identified a particular element and obtained its element id, you can
-get more details with the following call on the API.
-
 Having used the calls above to find out Simon Philpotts's element id,
 one can get more detail with:
 
@@ -239,6 +236,37 @@ The other commitments attach Simon directly to the corresponding events.
 There is no point in returning details about him in each one, so the
 commitment records contain just details of the event.
 
+You can also specify the dates on which to search for commitments,
+like this:
+
+::
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/commitments?start_date=2019-04-11\&end_date=2019-04-12
+
+Note the need for a backslash before the ampersand in this command line to
+prevent the ampersand being interpreted by the command shell.
+
+If only a start date is specified, then just the commitments on that day
+will be returned.  If an end date is specified, it is taken as being
+inclusive - commitments up to and including that end date.
+
+
 -------------
 Find requests
 -------------
+
+Requests for an element can be found using exactly the same kind
+of query.
+
+::
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/requests
+
+Note that only certain specialized elements within a Scheduler system
+can have requests - currently only Resource Groups.
+
+Requests are used when someone needs, for instance, a mini-bus but
+doesn't care which one they get.  The end user puts in a Request for
+a mini-bus, and then the administrator of mini-bus converts this
+into a Commitment for a particular mini-bus.
+
