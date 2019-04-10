@@ -50,6 +50,8 @@ it isn't accessible from a normal web browser, but it can be driven using
 tools like
 :ref:`Curl <curl>` described below.
 
+Explain about RESTful routing, with a useful link.  GET, PUT, POST, DELETE.
+
 ---------------------------
 Fundamental data structures
 ---------------------------

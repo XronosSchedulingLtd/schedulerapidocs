@@ -1,4 +1,4 @@
 #!/bin/bash
-rm -f cookies.jar
-curl -K curl.opt -c cookies.jar https://schedulerdemo.xronos.uk/api/login?uuid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
+rm -f cookies.sav
+curl -K curl.opt -c cookies.sav https://schedulerdemo.xronos.uk/api/login?uuid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
 echo

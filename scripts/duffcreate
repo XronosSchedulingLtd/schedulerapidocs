@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -K curl.opt --request POST --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["20", "20", "banana"]}' https://schedulerdemo.xronos.uk/api/events
+echo
