@@ -102,9 +102,15 @@ The curl command to issue this request would be:
 
 ::
 
-  curl -K curl.opt --request POST --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["119", "127", "20", "172"]}' https://schedulerdemo.xronos.uk/api/events
+  curl -K curl.opt \
+       --request POST \
+       --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["119", "127", "20", "172"]}' \
+       https://schedulerdemo.xronos.uk/api/events
 
-Note that we pass the JSON data as one large string to curl.
+Note that we pass the JSON data as one large string to curl.  The command
+has been split into several lines for legibility, but should be entered
+either as a single line, or with backslashes as shown to indicate
+line continuation.
 
 The response might look like this (re-formatted for ease of comprehension):
 
@@ -228,7 +234,10 @@ The following creation request
 
 ::
 
-  curl -K curl.opt --request POST --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["20", "20", "banana"]}' https://schedulerdemo.xronos.uk/api/events
+  curl -K curl.opt \
+       --request POST \
+       --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["20", "20", "banana"]}' \
+       https://schedulerdemo.xronos.uk/api/events
 
 deliberately attempts to add the same element (20) twice, and then a gash
 event id.
@@ -240,14 +249,14 @@ The response (formatted) is:
   {
     "status":"Created",
     "event":{
-      "id":95,
+      "id":102,
       "body":"A timed event",
       "starts_at":"2019-04-01T12:26:00.000+01:00",
       "ends_at":"2019-04-01T14:23:00.000+01:00",
       "all_day":false,
       "commitments":[
         {
-          "id":352,
+          "id":353,
           "status":"uncontrolled",
           "element":{
             "id":20,
@@ -264,23 +273,32 @@ The response (formatted) is:
     },
     "failures":[
       {
-        "id":null,
-        "status":"uncontrolled",
-        "element":{
-          "id":20,
-          "name":"SJP - Simon Philpotts",
-          "entity_type":"Staff",
-          "entity_id":1,
-          "valid":true
-        },
-        "valid":false,
-        "errors":{
-          "element_id":["has already been taken"]
+        "index":1,
+        "element_id":"20",
+        "item_type":"Commitment",
+        "item":{
+          "id":null,
+          "status":"uncontrolled",
+          "element":{
+            "id":20,
+            "name":"SJP - Simon Philpotts",
+            "entity_type":"Staff",
+            "entity_id":1,
+            "valid":true
+          },
+          "valid":false,
+          "errors":{
+            "element_id":["has already been taken"]
+          }
         }
       },
       {
-        "status":"Not found",
-        "element_id":"banana"
+        "index":2,
+        "element_id":"banana",
+        "item_type":"Hash",
+        "item":{
+          "status":"Not found"
+        }
       }
     ]
   }
@@ -289,13 +307,25 @@ Note that the status for the event creation is still "Created" - creating
 the event and adding elements are separate steps.
 
 However, the event has only one valid commitment attached to it.  The
-first attempt to add Simon Philpotts succeeded.  The second attempt
-failed, and so the corresponding (attempt at a) commitment record is
-in the "failures" array.  It's "valid" field contains false, and the
-"errors" field explains why.
+first attempt to add Simon Philpotts succeeded.  The second attempt failed,
+and the attempt to add an element with the id "banana" failed too.
 
-Finally the gash element id has resulted in a second entry in the
-"failures" array, explaining that there is no element with that id.
+You can do a simple check on whether you've had any errors when
+adding elements by looking at the size of the "failures" array.
+If it is 0, then all is well.
+
+If it is non-zero, then it contains one entry per failed addition.
+
+In each entry we have the following:
+
+- "index" tells us the index of the relevant element_id in the
+  array originally passed in.
+- "element_id" tells us the actual element_id passed in
+- "item_type" tells us the type of the following item.  It can
+  be "Commitment", "Request" or "Hash".  If it's one of the first
+  two it means the server got as far as trying to create one of them
+  but it was invalid, whilst a Hash means it didn't get that far.
+- "item" is the failed item, with more information on what went wrong.
 
 --------
 Requests

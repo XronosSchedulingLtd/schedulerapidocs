@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -f cookies.sav
+curl -K curl.opt -c cookies.sav http://localhost:3000/api/login?uuid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
+echo
