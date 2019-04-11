@@ -404,4 +404,124 @@ phones.  A user might want two mini-buses, but it doesn't generally
 matter which ones they are as long as they work.  Likewise for a
 school mobile phone.
 
+There exists within the demonstration system a Resource Group called
+"Minibus".  We can find it with the following request.
+
+::
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements?name=Minibus
+
+which gets the response (formatted):
+
+::
+
+  {
+    "status":"OK",
+    "elements":[
+      {
+        "id":259,
+        "name":"Minibus",
+        "entity_type":"Group",
+        "entity_id":59,
+        "valid":true
+      }
+    ]
+  }
+
+and then we can get more detail with:
+
+::
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/259
+
+which results in (again formatted):
+
+::
+
+  {
+    "status":"OK",
+    "element":{
+      "id":259,
+      "name":"Minibus",
+      "entity_type":"Group",
+      "entity_id":59,
+      "current":true,
+      "description":"Resource group",
+      "members":2
+    }
+  }
+
+So, it is indeed a Resource group and it has two members - the minibuses
+themselves.
+
+If we include this item's element id in a request to add to an event
+then the system will treat it slightly differently.  This is because
+we don't want *all* the minibuses in the group, just one of them.
+
+We can make a request like:
+
+::
+
+  curl -K curl.opt \
+       --request POST \
+       --data '{"event":{"body":"A timed event", "starts_at_text":"2019-04-01 12:26", "ends_at_text":"2019-04-01 14:23", "eventcategory_id":"20"}, "elements":["20", "259"]}' \
+       https://schedulerdemo.xronos.uk/api/events
+
+which creates a new event and requests Simon Philpotts and a minibus.
+The response looks like this:
+
+::
+
+  {
+    "status":"Created",
+    "event":{
+      "id":93,
+      "body":"A timed event",
+      "starts_at":"2019-04-01T12:26:00.000+01:00",
+      "ends_at":"2019-04-01T14:23:00.000+01:00",
+      "all_day":false,
+      "commitments":[
+        {
+          "id":344,
+          "status":"uncontrolled",
+          "element":{
+            "id":20,
+            "name":"SJP - Simon Philpotts",
+            "entity_type":"Staff",
+            "entity_id":1,
+            "valid":true
+          },
+          "valid":true
+        }
+      ],
+      "requests":[
+        {
+          "id":1,
+          "quantity":1,
+          "num_allocated":0,
+          "element":{
+            "id":259,
+            "name":"Minibus",
+            "entity_type":"Group",
+            "entity_id":59,
+            "valid":true
+          },
+          "valid":true
+        }
+      ],
+      "valid":true
+    },
+    "failures":[]
+  }
+
+Simon Philpotts has been attached to the event as a commitment, but the
+minibus has been treated differently.  A *request* for a minibus has
+been attached to the event and the minibus administrator should allocate
+one in due course.
+
+If you want more than one minibus, simply put the element id in
+the array of things to add more than once.  The server will notice
+it's a repeat and increment the "quantity" field in the existing request
+rather than creating a new request.
+
 
