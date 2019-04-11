@@ -99,9 +99,9 @@ These are:
   Don't try to mix and match these in the same request - use either
   the original three or these three - not a mixture.
 
-------------
-Add elements
-------------
+--------
+Elements
+--------
 
 The only reason for events to exist in Scheduler is to keep track
 of the elements involved in them. An event with no elements might
@@ -258,6 +258,32 @@ it can be confirmed.
 As our entries are all brand new, and there hasn't been any time for
 anyone to approve them or otherwise, the only two statuses which we
 can get are "uncontrolled" or "requested".
+
+---------------
+Adding elements
+---------------
+
+If you want to add elements to an event which already exists then
+the request is very similar.  Instead of providing details for
+the event (date/time etc.) you provide the event id of an existing
+event.
+
+The request:
+
+::
+
+  curl -K curl.opt \
+       --request POST \
+       --data '{"elements":["21", "22"]}' \
+       https://schedulerdemo.xronos.uk/api/events/93/add
+
+would attempt to add elements with ids 21 and 22 to the event created
+in the previous section.  Note that the event id is passed as part of the
+URL in line with RESTful conventions.
+
+The response received back is identical to that for creating an event,
+with the exception that the status will be "OK" rather than "Created".
+
 
 --------
 Failures
