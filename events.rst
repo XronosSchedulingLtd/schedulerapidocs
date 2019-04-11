@@ -524,4 +524,56 @@ the array of things to add more than once.  The server will notice
 it's a repeat and increment the "quantity" field in the existing request
 rather than creating a new request.
 
+--------
+Deleting
+--------
+
+If you know an event's id (and you have suitable permission) then you can
+delete it.  Deleting an event will automatically delete any commitments
+or requests attached to it.
+
+In general you can delete any event which you have created.  You may be
+able to delete other events as well depending on your user settings.
+
+To delete the event created in the section above the call would be:
+
+::
+
+  curl -K curl.opt \
+       --request DELETE \
+       https://schedulerdemo.xronos.uk/api/events/93
+
+and the response would be simply:
+
+::
+
+  {"status":"OK"}
+
+
+Similarly, you can delete individual commitment or request records.
+
+::
+
+  curl -K curl.opt \
+       --request DELETE \
+       https://schedulerdemo.xronos.uk/api/commitments/344
+
+Again, the response in the case of success is just:
+
+::
+
+  {"status":"OK"}
+
+but if you try to delete a non-existent commitment (e.g. because you
+already deleted the event and the commitment went with it) then
+you'll get a response like:
+
+::
+
+  {
+    "status":"Bad request",
+    "exception":"ActiveRecord::RecordNotFound",
+    "message":"Couldn't find Commitment with 'id'=344"
+  }
+
 

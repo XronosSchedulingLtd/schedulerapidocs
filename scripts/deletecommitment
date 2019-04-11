@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -K curl.opt --request DELETE https://schedulerdemo.xronos.uk/api/commitments/348
+echo
