@@ -171,6 +171,20 @@ then a path using the normal Rails conventions.
 The above URL is asking for a listing of all elements with a name
 which contains "smith".  The search is not case sensitive.
 
+--------------
+RESTful routes
+--------------
+
+Scheduler is built on top of the `Rails`_ application framework
+which makes use of `RESTful routing`_.  All the URLs used by
+the API therefore follow this convention.  Section 2.2 of the
+second web page lists the kind of paths which might be used.
+The Scheduler API makes use of a subset of these.
+
+.. _Rails: https://rubyonrails.org/
+.. _RESTful routing: https://guides.rubyonrails.org/routing.html
+
+
 -------
 Cookies
 -------
