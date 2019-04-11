@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -K curl.opt --request POST --data '{"event":{"body":"A timed event", "starts_at":"2019-04-02", "ends_at":"2019-04-04", "all_day":true, "eventcategory_id":"20"}, "elements":["119", "127", "20", "1"]}' http://localhost:3000/api/events
+echo

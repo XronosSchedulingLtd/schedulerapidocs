@@ -63,6 +63,42 @@ These are:
      - Optional
 
 
+.. note::
+
+  "But", you say, "I've read your page about how to handle dates
+  and I've built my whole application using exclusive end dates as
+  advised.  Do I need to convert my end dates back into human-friendly
+  form in order to send them to Scheduler?"
+
+  No, happily you don't.  If you don't want Scheduler to do the
+  massaging work for you then you can instead pass the following
+  three parameters, which will be stored without massaging (although
+  they will still be checked for validity).
+
+  .. list-table:: Event parameters
+     :widths: 40 180 40
+     :header-rows: 1
+
+     * - Field name
+       - Meaning
+       - Comment
+     * - all_day
+       - Pass true for an all day event, and false for a timed
+         event.
+       - Default: false
+     * - starts_at
+       - The starting date or date/time of the event in textual
+         format.  For an all-day event, pass just a date in ISO
+         format, e.g. "2019-04-01".  For a timed event, pass
+         a date and time, e.g. "2019-04-01 12:27".
+       - Required field
+     * - ends_at
+       - The *exclusive* end date/time of the event.
+       - Required field
+
+  Don't try to mix and match these in the same request - use either
+  the original three or these three - not a mixture.
+
 ------------
 Add elements
 ------------
