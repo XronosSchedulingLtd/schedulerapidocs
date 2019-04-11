@@ -24,6 +24,7 @@ Download this guide as a
   dates
   login
   elements
+  eventcategories
   events
   errors
 

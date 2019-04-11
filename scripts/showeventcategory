@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -K curl.opt https://schedulerdemo.xronos.uk/api/eventcategories/20
+echo

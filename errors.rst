@@ -40,6 +40,9 @@ The error codes returned by the Scheduler API are as follows:
      - The client has requested an action which isn't consistent.
        E.g. to create a Request record for something which doesn't
        have requests.
+   * - 418
+     - I'm a teapot
+     - Self explanatory
    * - 422
      - Unprocessable entity
      - The parameters given on an action make it impossible to
