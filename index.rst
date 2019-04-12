@@ -28,12 +28,14 @@ Download this guide as a
   events
   errors
 
-Other documents
----------------
+Available documents
+-------------------
 
-- `Scheduler User Guide <https://xronos.uk/>`_
+- `Scheduler Admin Guide <https://xronos.uk/admin/>`_
 - `Scheduler Advanced User Guide <https://xronos.uk/advanced/>`_
+- `Scheduler API Guide <https://xronos.uk/api/>`_
 - `Scheduler Installation Guide <https://xronos.uk/install/>`_
+- `Scheduler User Guide <https://xronos.uk/>`_
 
 Scheduler is licensed under the GNU General Public Licence, version 2.
 
