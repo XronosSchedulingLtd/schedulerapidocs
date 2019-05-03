@@ -1,7 +1,6 @@
 Events
 ======
 
--------------
 POST requests
 -------------
 
@@ -14,7 +13,6 @@ As we're now going to be creating new records in Scheduler we need
 a new verb - POST.  This is the standard verb for creating new entries
 of some sort.  
 
-----------
 Parameters
 ----------
 
@@ -99,7 +97,6 @@ These are:
   Don't try to mix and match these in the same request - use either
   the original three or these three - not a mixture.
 
---------
 Elements
 --------
 
@@ -110,7 +107,6 @@ as well not be there.
 You can add elements to events at the same time as creating the event,
 or afterwards.
 
------------------
 Creating an event
 -----------------
 
@@ -259,7 +255,6 @@ As our entries are all brand new, and there hasn't been any time for
 anyone to approve them or otherwise, the only two statuses which we
 can get are "uncontrolled" or "requested".
 
----------------
 Adding elements
 ---------------
 
@@ -285,7 +280,6 @@ The response received back is identical to that for creating an event,
 with the exception that the status will be "OK" rather than "Created".
 
 
---------
 Failures
 --------
 
@@ -389,7 +383,6 @@ In each entry we have the following:
   but it was invalid, whilst a Hash means it didn't get that far.
 - "item" is the failed item, with more information on what went wrong.
 
---------
 Requests
 --------
 
@@ -524,7 +517,22 @@ the array of things to add more than once.  The server will notice
 it's a repeat and increment the "quantity" field in the existing request
 rather than creating a new request.
 
+Querying
 --------
+
+If you know the ID of an event (e.g. because you've queried an element
+of the system and found it is involved with that event) then you can
+get full details of the event using a GET call:
+
+::
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/events/3
+
+Provided the event exists you will get back a status of OK, plus all
+the event information in exactly the same format as documented above
+for event creation.
+
+
 Deleting
 --------
 
