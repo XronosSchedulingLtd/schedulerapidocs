@@ -21,45 +21,47 @@ basic criteria.  Without these, the event creation will fail.
 
 These are:
 
-.. list-table:: Event parameters
-   :widths: 40 200 40
-   :header-rows: 1
+body
+        A title for the event.  This is what will be shown in the
+        usual Scheduler event display.  Simple explanatory text.
 
-   * - Field name
-     - Meaning
-     - Comment
-   * - body
-     - A title for the event.  This is what will be shown in the
-       usual Scheduler event display.  Simple explanatory text.
-     - Required field
-   * - event_category_id
-     - Every event must have an event category.  This might be
-       "Lesson", "Meeting", "Performance", or anything else set
-       up by your system administrator.  In this field pass the
-       numeric id of your chosen category.  What this is will
-       depend on your system, but on the demonstration system
-       you can use a value of 20, which is "Meeting".
-     - Required field
-   * - all_day_field
-     - Pass true for an all day event, and false for a timed
-       event.
-     - Default: false
-   * - starts_at_text
-     - The starting date or date/time of the event in textual
-       format.  For an all-day event, pass just a date in ISO
-       format, e.g. "2019-04-01".  For a timed event, pass
-       a date and time, e.g. "2019-04-01 12:27".
-     - Required field
-   * - ends_at_text
-     - The ending date or date/time in textual format.  For
-       a timed event, this will default to being the same as
-       the start time, giving an event of zero duration.  For
-       an all day event, it will default to a duration of 1
-       day.  When giving an explicit end date for an all day
-       event, give an inclusive date.  If your event runs from
-       the 1st to the 3rd, pass an end_date_text of the 3rd.
-     - Optional
+        Required field
 
+event_category_id
+        Every event must have an event category.  This might be
+        "Lesson", "Meeting", "Performance", or anything else set
+        up by your system administrator.  In this field pass the
+        numeric id of your chosen category.  What this is will
+        depend on your system, but on the demonstration system
+        you can use a value of 20, which is "Meeting".
+
+        Required field
+
+all_day_field
+        Pass true for an all day event, and false for a timed
+        event.
+
+        Default: false
+
+starts_at_text
+        The starting date or date/time of the event in textual
+        format.  For an all-day event, pass just a date in ISO
+        format, e.g. "2019-04-01".  For a timed event, pass
+        a date and time, e.g. "2019-04-01 12:27".
+
+        Required field
+
+ends_at_text
+        The ending date or date/time in textual format.  For
+        a timed event, this will default to being the same as
+        the start time, giving an event of zero duration.  For
+        an all day event, it will default to a duration of 1
+        day.  When giving an explicit end date for an all day
+        event, give an inclusive date.  If your event runs from
+        the 1st to the 3rd, pass an end_date_text of the 3rd.
+
+        Optional
+        
 
 .. note::
 
@@ -73,26 +75,24 @@ These are:
   three parameters, which will be stored without massaging (although
   they will still be checked for validity).
 
-  .. list-table:: Event parameters
-     :widths: 40 180 40
-     :header-rows: 1
+  all_day
+          Pass true for an all day event, and false for a timed
+          event.
 
-     * - Field name
-       - Meaning
-       - Comment
-     * - all_day
-       - Pass true for an all day event, and false for a timed
-         event.
-       - Default: false
-     * - starts_at
-       - The starting date or date/time of the event in textual
-         format.  For an all-day event, pass just a date in ISO
-         format, e.g. "2019-04-01".  For a timed event, pass
-         a date and time, e.g. "2019-04-01 12:27".
-       - Required field
-     * - ends_at
-       - The *exclusive* end date/time of the event.
-       - Required field
+          Default: false
+
+  starts_at
+          The starting date or date/time of the event in textual
+          format.  For an all-day event, pass just a date in ISO
+          format, e.g. "2019-04-01".  For a timed event, pass
+          a date and time, e.g. "2019-04-01 12:27".
+
+          Required field
+
+  ends_at
+          The *exclusive* end date/time of the event.
+
+          Required field
 
   Don't try to mix and match these in the same request - use either
   the original three or these three - not a mixture.
