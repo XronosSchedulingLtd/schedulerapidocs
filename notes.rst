@@ -125,7 +125,7 @@ record in the database, this calls for a POST request.
   curl -K curl.opt \
        --request POST \
        --data '{"note":{"contents":"Note created through the API","visible_pupil":true}}' \
-       http://localhost:3000/api/events/5/notes
+       http://schedulerdemo.xronos.uk/api/events/5/notes
 
 and the response to this request is:
 
@@ -166,7 +166,7 @@ database this is a PUT request.
   curl -K curl.opt \
        --request PUT \
        --data '{"note":{"contents":"Amended contents","visible_guest":true}}' \
-       http://localhost:3000/api/notes/11
+       http://schedulerdemo.xronos.uk/api/notes/11
 
 Here we are changing the contents of the note, plus making it visible
 to guest users.  The response is:
