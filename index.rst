@@ -26,6 +26,7 @@ Download this guide as a
   elements
   eventcategories
   events
+  notes
   errors
 
 Available documents
