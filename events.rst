@@ -115,7 +115,7 @@ To create an event, we send a POST request to
 information listed above as JSON data.  The data for a simple event
 creation might look like this:
 
-::
+.. code-block:: json
 
   {
     "event":{
@@ -124,7 +124,7 @@ creation might look like this:
       "ends_at_text":"2019-04-01 14:23",
       "eventcategory_id":"20"
     },
-    elements:["119", "127", "20", "172"]
+    "elements":["119", "127", "20", "172"]
   }
 
 The above would specify that we want a timed event (all_day_field left
@@ -132,7 +132,7 @@ to default to false) with four elements attached to it.
 
 The curl command to issue this request would be:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request POST \
@@ -146,7 +146,7 @@ line continuation.
 
 The response might look like this (re-formatted for ease of comprehension):
 
-::
+.. code-block:: json
 
   {
     "status":"Created",
@@ -265,7 +265,7 @@ event.
 
 The request:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request POST \
@@ -288,7 +288,7 @@ fail - the element is already there, or the element doesn't exist.
 
 The following creation request
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request POST \
@@ -300,7 +300,7 @@ event id.
 
 The response (formatted) is:
 
-::
+.. code-block:: json
 
   {
     "status":"Created",
@@ -400,13 +400,13 @@ school mobile phone.
 There exists within the demonstration system a Resource Group called
 "Minibus".  We can find it with the following request.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements?name=Minibus
 
 which gets the response (formatted):
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -423,13 +423,13 @@ which gets the response (formatted):
 
 and then we can get more detail with:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/259
 
 which results in (again formatted):
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -453,7 +453,7 @@ we don't want *all* the minibuses in the group, just one of them.
 
 We can make a request like:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request POST \
@@ -463,7 +463,7 @@ We can make a request like:
 which creates a new event and requests Simon Philpotts and a minibus.
 The response looks like this:
 
-::
+.. code-block:: json
 
   {
     "status":"Created",
@@ -524,7 +524,7 @@ If you know the ID of an event (e.g. because you've queried an element
 of the system and found it is involved with that event) then you can
 get full details of the event using a GET call:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/events/3
 
@@ -545,7 +545,7 @@ able to delete other events as well depending on your user settings.
 
 To delete the event created in the section above the call would be:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request DELETE \
@@ -553,14 +553,14 @@ To delete the event created in the section above the call would be:
 
 and the response would be simply:
 
-::
+.. code-block:: json
 
   {"status":"OK"}
 
 
 Similarly, you can delete individual commitment or request records.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request DELETE \
@@ -568,7 +568,7 @@ Similarly, you can delete individual commitment or request records.
 
 Again, the response in the case of success is just:
 
-::
+.. code-block:: json
 
   {"status":"OK"}
 
@@ -576,7 +576,7 @@ but if you try to delete a non-existent commitment (e.g. because you
 already deleted the event and the commitment went with it) then
 you'll get a response like:
 
-::
+.. code-block:: json
 
   {
     "status":"Bad request",

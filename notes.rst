@@ -13,7 +13,7 @@ Listing
 To list the notes attached to an event, we send a GET request to
 "https://schedulerdemo.xronos.uk/api/events/NN/notes".  For example:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/events/5/notes
 
@@ -24,7 +24,7 @@ extra note of my own.
 
 The (re-formatted) response to this request is:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -70,13 +70,13 @@ More detail
 For (slightly) more information about any given note you can issue
 a SHOW request for it, specifying its id number.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/notes/9
 
 which for the above note will result in this response:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -120,7 +120,7 @@ Provided your API user has permission to add notes, you can add
 a note to any event in the system.  Because you are creating a new
 record in the database, this calls for a POST request.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request POST \
@@ -129,7 +129,7 @@ record in the database, this calls for a POST request.
 
 and the response to this request is:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -161,7 +161,7 @@ Provided your user owns an existing note within the system you can also
 update it.  Because you're changing an existing record within the
 database this is a PUT request.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request PUT \
@@ -171,7 +171,7 @@ database this is a PUT request.
 Here we are changing the contents of the note, plus making it visible
 to guest users.  The response is:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -245,7 +245,7 @@ Finally, you can delete any note belonging to your user.
 To delete the note which we've been playing with the request
 would be:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt \
        --request DELETE \
@@ -253,7 +253,7 @@ would be:
 
 and the response would be simply:
 
-::
+.. code-block:: json
 
   {"status":"OK"}
 
@@ -261,7 +261,7 @@ and the response would be simply:
 If you were to attempt to delete it a second time, the response would
 be:
 
-::
+.. code-block:: json
 
   {
     "status":"Not found",

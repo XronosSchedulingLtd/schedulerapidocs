@@ -86,13 +86,15 @@ to as an Entity) will have fields specific to the type of item.
 When you retrieve information about an Element, you will always be told
 what kind of Entity the record is linked to.  For example:
 
-::
+.. code-block:: json
 
-  element: {
-    id:          1234,
-    name:        "Able Baker",
-    entity_type: "Staff",
-    entity_id:   12
+  {
+    "element":{
+      "id":          1234,
+      "name":        "Able Baker",
+      "entity_type": "Staff",
+      "entity_id":   12
+    }
   }
 
 This is how you would receive summary information about the Element

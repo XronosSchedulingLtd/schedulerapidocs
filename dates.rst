@@ -98,11 +98,13 @@ are:
 
 So if you were to send an event creation request with:
 
-::
+.. code-block:: json
 
-  event: {
-    start_time_text: "2019-03-03",
-    all_day_field:   true
+  {
+    "event": {
+      "start_time_text": "2019-03-03",
+      "all_day_field":   true
+    }
   }
 
 The system will realise that the end time should be set to 1 day
@@ -110,12 +112,14 @@ later and fill it in for you automatically.
 
 Similarly, if you were to send:
 
-::
+.. code-block:: json
 
-  event: {
-    start_time_text: "2019-03-05",
-    end_time_text:   "2019-03-07",
-    all_day_field:   true
+  {
+    "event": {
+      "start_time_text": "2019-03-05",
+      "end_time_text":   "2019-03-07",
+      "all_day_field":   true
+    }
   }
 
 It will realise that you want your event to start at the beginning

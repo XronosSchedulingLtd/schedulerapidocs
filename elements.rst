@@ -13,7 +13,7 @@ retrieve more information about it through the API.
 
 Using curl, a suitable invocation would look like this.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements?name=L101
 
@@ -23,13 +23,13 @@ will match only elements with exactly that name.
 A successful response will have a status code of 200 (OK) and contents
 like:
 
-::
+.. code-block:: json
 
   {"status":"OK","elements":[{"id":58,"name":"L101","entity_type":"Location","entity_id":"3","valid":"true"}]}
 
 A well formed request which nonetheless matches no elements would return:
 
-::
+.. code-block:: json
 
   {"status":"Not found","elements":[]}
 
@@ -69,7 +69,7 @@ their names.  This kind of search is not case sensitive.
 
 The following call through curl:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements?namelike=mi
 
@@ -77,7 +77,7 @@ Will return all the elements where the name contains "mi".
 
 A successful response might look like (re-formatted):
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -118,7 +118,7 @@ were matching records in the database.
 
 A well formed request which nonetheless matches no elements would return:
 
-::
+.. code-block:: json
 
   {"status":"Not found","elements":[]}
 
@@ -130,13 +130,13 @@ Get more details
 Having used the calls above to find out Simon Philpotts's element id,
 one can get more detail with:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20
 
 This will produce a response like this (re-formatted):
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -165,7 +165,7 @@ Find commitments
 We can also find out what events Simon Philpotts is involved in using
 the following call:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/commitments
 
@@ -173,7 +173,7 @@ Note that by default this will fetch just the commitments for today's
 date.  As always, the data will arrive as a single long string, but
 here it is re-formatted for ease of reading:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -272,7 +272,7 @@ commitment records contain just details of the event.
 You can also specify the dates on which to search for commitments,
 like this:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/commitments?start_date=2019-04-11\&end_date=2019-04-12
 
@@ -291,7 +291,7 @@ Find requests
 Requests for an element can be found using exactly the same kind
 of query.
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/requests
 

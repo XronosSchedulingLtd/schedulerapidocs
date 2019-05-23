@@ -15,14 +15,14 @@ Listing
 You can get a listing of available event categories with the following
 call on the API:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/eventcategories
 
 and the result which you'll get back on the demonstration system
 (re-formatted) is:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",
@@ -106,7 +106,7 @@ More detail
 If you want more information about a particular event category you
 can use a separate call:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/eventcategories/20
 
@@ -114,7 +114,7 @@ This one is asking for fuller information about eventcategory 20 - Meeting.
 
 The formatted response looks like this:
 
-::
+.. code-block:: json
 
   {
     "status":"OK",

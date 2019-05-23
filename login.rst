@@ -27,7 +27,7 @@ Log in
 The following commands issued at the command line will effect a login
 to the Scheduler API:
 
-::
+.. code-block:: bash
 
   rm -f cookies.sav
   curl -K curl.opt -c cookies.sav https://schedulerdemo.xronos.uk/api/login?uuid=f9c4317f-97d8-48ae-abae-dc7b52b63a11
@@ -52,14 +52,14 @@ of your chosen user.
 A successful response to this login attempt will have an http status
 of 200 (OK) and will carry the following JSON data:
 
-::
+.. code-block:: json
 
   {"status":"OK"}
 
 A failed login attempt will have an http status of 401 (unauthorized)
 and will carry the following JSON data:
 
-::
+.. code-block:: json
 
   {"status":"Access denied"}
 
@@ -74,13 +74,13 @@ a session to a known state.
 
 The following curl command will effect a logout:
 
-::
+.. code-block:: bash
 
   curl -K curl.opt https://schedulerdemo.xronos.uk/api/logout
 
 and the response will be:
 
-::
+.. code-block:: json
 
   {"status":"OK"}
 
