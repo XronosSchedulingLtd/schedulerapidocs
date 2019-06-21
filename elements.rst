@@ -123,6 +123,10 @@ A well formed request which nonetheless matches no elements would return:
   {"status":"Not found","elements":[]}
 
 
+There is a limit of 100 on the number of elements which this call will
+return.  This is to prevent excessively large responses, and to discourage
+dumping of the database by doing a query for, for instance, "e".
+
 ----------------
 Get more details
 ----------------
