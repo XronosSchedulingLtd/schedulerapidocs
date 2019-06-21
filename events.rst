@@ -530,7 +530,8 @@ get full details of the event using a GET call:
 
 Provided the event exists you will get back a status of OK, plus all
 the event information in exactly the same format as documented above
-for event creation.
+for event creation, plus additional fields for the event's owner (a User)
+if any, and organiser (a Staff Element) if any.
 
 
 Deleting
