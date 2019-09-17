@@ -61,7 +61,14 @@ ends_at_text
         the 1st to the 3rd, pass an end_date_text of the 3rd.
 
         Optional
-        
+
+organiser_id
+        The element id of a member of staff who should be regarded
+        as the event's organiser.  (Note that for consistency
+        it is the staff member's *Element* id, and not the underlying
+        staff entity id.)
+
+        Optional
 
 .. note::
 
