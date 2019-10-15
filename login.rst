@@ -1,7 +1,6 @@
 Logging in and out
 ==================
 
-------------
 Curl options
 ------------
 
@@ -20,7 +19,6 @@ Create a file called "curl.opt" with the following contents:
 These specify that all our data exchanges are to be in JSON, and the
 file cookies.sav is to be used to find previously saved cookies.
 
-------
 Log in
 ------
 
@@ -64,7 +62,6 @@ and will carry the following JSON data:
   {"status":"Access denied"}
 
 
--------
 Log out
 -------
 
@@ -85,5 +82,134 @@ and the response will be:
   {"status":"OK"}
 
 with an http status of 200 (OK).
+
+
+Change user
+-----------
+
+A suitably privileged API user can also switch user id in order to
+make changes on behalf of another user.  This can be useful if you
+are writing a general application, through which multiple users
+can create events in Scheduler.
+
+In order to make use of any of the following facilities, your API
+user must also have the "can_su" privilege bit set.  Without that,
+all the following requests will be rejected with a status of "Forbidden".
+
+Find user id
+------------
+
+Given a user's email address, you can find the corresponding internal
+user id with a call like the following:
+
+.. code-block:: bash
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/users?email=claire.dunwoody@xronos.uk
+
+This is asking for a listing of all users with the email address
+"claire.dunwoody@xronos.uk".
+
+Assuming you have the can_su privilege and the requested user exists,
+the response will look like this:
+
+.. code-block:: json
+
+  {
+    "status":"OK",
+    "users":[
+      {
+        "id":2,
+        "name":"Claire Dunwoody",
+        "email":"claire.dunwoody@xronos.uk",
+        "valid":true
+      }
+    ]
+  }
+
+The user id shown in this response is what you need to effect an su.
+
+Su
+--
+
+The call to change user id looks like you're simply writing a new
+user_id to the session.  What happens behind the scenes is slightly
+more complicated.  You can have only one session at a time so the
+session id in the request URL is irrelevant and ignored.  Leave it as
+1.
+
+Provided your request passes the necessary authorisation checks,
+the user_id is not actually simply written to the session.  The whole
+session record is reset and then you are logged in as the new
+user (with a note being kept of who you were before).  For this
+reason, the response will include a new session cookie and it's important
+to keep that, just as you did when you first logged on.  Without that,
+you can't issue any more requests.
+
+Whilst your session is in an su'ed state, permission checking changes
+slightly.  Your original user is the one which has permission to use
+the API, but your new effective user is the one which will be checked
+for everything else.
+
+It is not possible to make nested su requests.  You need to revert the
+first one before you can make another one.
+
+To switch to having an effective user of Claire Dunwoody, issue
+the following request:
+
+.. code-block:: bash
+
+  curl -K curl.opt -c cookies.jar --request PUT --data '{"session":{"user_id":"2"}}' https://schedulerdemo.xronos.uk/api/sessions/1
+
+Linguistically, this is saying "Amend session 1 and set the value of user_id to be 2 within that session".  The server will take it as a request to switch to being user 2.
+
+Assuming you have the necessary permission, the response will be:
+
+.. code-block:: json
+
+  {"status":"OK"}
+
+
+Who am I
+--------
+
+You can check what your current effective user id is with the following
+call:
+
+.. code-block:: bash
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/sessions/1/whoami
+
+which will get a response like:
+
+.. code-block:: json
+
+  {"status":"OK","user_id":2}
+
+
+Reverting su
+------------
+
+Having finished the work you need to do as a different user you can go
+back to your original user id by issuing:
+
+.. code-block:: bash
+
+  curl -K curl.opt -c cookies.jar --request PUT --data '{}' https://schedulerdemo.xronos.uk/api/sessions/1/revert
+
+and again the response will be:
+
+.. code-block:: json
+
+  {"status":"OK"}
+
+You can also get back to being your original user by issuing a fresh su
+request specifying your original user id.  This is the only case where
+a nested su request will work.  The system notices you're trying to
+set your user id back to what it was before and does the "Revert su"
+processing.
+
+Again, it is necessary to save the new session cookie.  Reverting also
+causes your session to be completely reset and so the session cookie
+changes.
 
 
