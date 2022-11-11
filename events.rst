@@ -541,6 +541,36 @@ for event creation, plus additional fields for the event's owner (a User)
 if any, and organiser (a Staff Element) if any.
 
 
+Modifying
+---------
+
+Provided you have edit rights you can modify an existing event using
+the same basic fields as for event creation above.  (If you want to change
+the elements involved in an event, use the adding and removing calls
+listed above - this call is just for modifying the basic fields of the
+event like its title, organiser or event category.)
+
+An example call to rename an event would be:
+
+.. code-block:: bash
+
+  curl -K curl.opt \
+       --request PATCH \
+       --data '{"event":{"body":"A renamed event"}}' \
+       https://schedulerdemo.xronos.uk/api/events/93
+
+And a similar call to change the organiser of an event would be:
+
+.. code-block:: bash
+
+  curl -K curl.opt \
+       --request PATCH \
+       --data '{"event":{"organiser_id":"36"}}' \
+       https://schedulerdemo.xronos.uk/api/events/93
+
+The parameters which you can supply to this call are the same ones listed
+at the top of this page for creating an event.
+
 Deleting
 --------
 
