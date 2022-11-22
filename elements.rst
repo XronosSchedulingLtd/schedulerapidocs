@@ -287,6 +287,41 @@ If only a start date is specified, then just the commitments on that day
 will be returned.  If an end date is specified, it is taken as being
 inclusive - commitments up to and including that end date.
 
+If required, you can also ask for details of any locations and/or staff
+involved in any of the returned events using a command like this:
+
+.. code-block:: bash
+
+  curl -K curl.opt https://schedulerdemo.xronos.uk/api/elements/20/commitments?include=staff,locations
+
+This will cause the return of initials of any staff and the short names of any
+locations involved in the events as additional data in the event records.
+
+.. code-block:: json
+
+  {
+    "status":"OK",
+    "commitments":[
+      {
+        "id":75,
+        "status":"uncontrolled",
+        "event":{
+          "id":25,
+          "body":"10 Mat3",
+          "starts_at":"2019-04-10T09:25:00.000+01:00",
+          "ends_at":"2019-04-10T10:15:00.000+01:00",
+          "all_day":false,
+          "staff":"SJP",
+          "locations":"L101",
+          "valid":true
+        },
+        "valid":true
+      }
+    ]
+  }
+
+Multiple staff and locations will be returned as a comma-separated list.
+
 
 -------------
 Find requests
